@@ -38,6 +38,7 @@
         <resources>
             <ecocode_minify_setup>
                 <setup>
+                    <class>Ecocode_Minify_Model_Resource_Setup</class>
                     <module>Ecocode_Minify</module>
                 </setup>
             </ecocode_minify_setup>
