@@ -52,7 +52,7 @@ class Ecocode_Minify_Model_Observer{
 	public function warmUpJsCssCache(){
 		//depending on your system and the number of urls this could take some time
 		if(!Mage::getStoreConfigFlag('ecocode_minify/settings/warmup')) return;
-		Mage::getSingleton('ecocode_minify/log')->log('Try cache warump');
+		Mage::getSingleton('ecocode_minify/log')->log('Try cache warmup');
 		ini_set('max_execution_time', 600);
 		$helper = Mage::helper('ecocode_minify');
 		try{
@@ -62,7 +62,7 @@ class Ecocode_Minify_Model_Observer{
 			foreach($urls AS $url){
 				$this->crawlPage($url);
 			}
-			Mage::getSingleton('ecocode_minify/log')->log('Cache warump successful (urls hit in details)', implode($urls, "<br />"));
+			Mage::getSingleton('ecocode_minify/log')->log('Cache warmup successful (urls hit in details)', implode($urls, "<br />"));
 			Mage::getSingleton('adminhtml/session')->addSuccess($helper->__('Minify: Cache warm up successfull. (Urls hit: %s)', count($urls)));
 		} catch(Exception $e){
 			Mage::getSingleton('adminhtml/session')->addError($helper->__($e->getMessage()));

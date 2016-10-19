@@ -122,7 +122,7 @@ class Ecocode_Minify_Model_Compiler_Js extends Ecocode_Minify_Model_Compiler_Abs
 		$optionsString = $this->createOptionsString($options);
 		$output = array();
 		$status = 0;
-		exec(escapeshellcmd('java -jar ' . $compilerJAR . ' ' . $optionsString . ' --js ' . $inputFile . ' --js_output_file ' . $outputFile)  . ' 2>&1', $output, $status);
+		exec(escapeshellcmd('java -server -XX:+TieredCompilation -jar ' . $compilerJAR . ' ' . $optionsString . ' --js ' . $inputFile . ' --js_output_file ' . $outputFile)  . ' 2>&1', $output, $status);
 		
         return array($status, $output);
 	}

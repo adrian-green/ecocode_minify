@@ -24,11 +24,9 @@ class Ecocode_Minify_Model_Design_Package extends Mage_Core_Model_Design_Package
         if (!$targetDir) {
             return '';
         }
-        //we sum the size so we can determ if something changed
-        $fileSizeTotal = $this->getSumFileSize($files);
-
+        $fileSumModified = $this->getSumModifiedTime($files);
         //if size changed a new file will be generated so browser caching wont be a problem
-        $targetFilename = md5(implode(',', $files) . $fileSizeTotal) . '-' . $this->getSuffix('js') . '.js';
+        $targetFilename = md5(implode(',', $files) . $fileSumModified) . '-' . $this->getSuffix('js') . '.js';
         $url = Mage::getBaseUrl('media', Mage::app()->getRequest()->isSecure()) . 'js/' . $targetFilename;
         if (file_exists($targetDir . DS . $targetFilename)) {
             return $url;
@@ -84,9 +82,9 @@ class Ecocode_Minify_Model_Design_Package extends Mage_Core_Model_Design_Package
             $port = $isSecure ? 443 : 80;
         }
 
-        //we sum the size so we can determ if something changed
-        $fileSizeTotal = $this->getSumFileSize($files);
-        $targetFilename = md5(implode(',', $files) . "|{$hostname}|{$port}" . $fileSizeTotal) . '-' . $this->getSuffix('css') . '.css';
+
+        $fileSumModified = $this->getSumModifiedTime($files);
+        $targetFilename = md5(implode(',', $files) . "|{$hostname}|{$port}" . $fileSumModified) . '-' . $this->getSuffix('css') . '.css';
         $url = $baseMediaUrl . $mergerDir . '/' . $targetFilename;
         if (file_exists($targetDir . DS . $targetFilename)) {
             return $url;
@@ -245,5 +243,21 @@ class Ecocode_Minify_Model_Design_Package extends Mage_Core_Model_Design_Package
             $sizeTotal += filesize($file);
         }
         return $sizeTotal;
+    }
+
+    /**
+     * Sums the timestamp epoch for all files
+     * @param array $files
+     *
+     * @return int
+     */
+    protected function getSumModifiedTime($files = [])
+    {
+        $result = 0;
+        foreach ($files as $file) {
+            $result += filemtime($file);
+        }
+
+        return $result;
     }
 }

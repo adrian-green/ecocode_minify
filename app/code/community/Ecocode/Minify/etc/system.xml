@@ -3,7 +3,7 @@
 <config>
     <tabs>
         <ecocode>
-            <label><![CDATA[<img id="ecocode_tab" src="" alt="" border="0" /><script>$('ecocode_tab').src = document.location.protocol + '//' + document.location.host + '/skin/adminhtml/base/default/images/ecocode/logo.png';</script>]]></label>
+            <label>Minify JS</label>
             <sort_order>400</sort_order>
         </ecocode>
     </tabs>

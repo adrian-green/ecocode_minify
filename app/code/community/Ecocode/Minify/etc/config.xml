@@ -3,7 +3,6 @@
     <modules>
         <Ecocode_Minify>
             <version>0.0.4</version>
-            <summary>Ecocode Minify is a Magento Module, to minify your merged CSS and JS files.</summary>
             <license>OSL 3.0</license>
         </Ecocode_Minify>
     </modules>
@@ -38,7 +37,6 @@
         <resources>
             <ecocode_minify_setup>
                 <setup>
-                    <class>Ecocode_Minify_Model_Resource_Setup</class>
                     <module>Ecocode_Minify</module>
                 </setup>
             </ecocode_minify_setup>
@@ -76,13 +74,13 @@
     </global>
     <admin>
         <routers>
-            <ecocode_minify>
-                <use>admin</use>
+            <adminhtml>
                 <args>
-                    <module>Ecocode_Minify</module>
-                    <frontName>EcoMinify</frontName>
+                    <modules>
+                        <ecocode_minify after="Mage_Adminhtml">Ecocode_Minify_Adminhtml</ecocode_minify>
+                    </modules>
                 </args>
-            </ecocode_minify>
+            </adminhtml>
         </routers>
     </admin>
     <adminhtml>
